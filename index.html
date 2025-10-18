@@ -18,7 +18,12 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('photos/382526807.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-image {
+                background-attachment: fixed;
+            }
         }
         
         .gallery-slider {
@@ -337,41 +342,46 @@
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href = '#hero' class="text-2xl font-bold font-serif text-gray-800">Fabulosa Casa</a>
             <div class="hidden md:flex space-x-8">
-                <a href="#gallery" class="hover:text-blue-600 transition-colors">Gallery</a>
-                <a href="#amenities" class="hover:text-blue-600 transition-colors">Amenities</a>
-                <a href="#location" class="hover:text-blue-600 transition-colors">Location</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+                <a href="#gallery" class="hover:text-blue-600 transition-colors" data-en="Gallery" data-es="Galería">Gallery</a>
+                <a href="#amenities" class="hover:text-blue-600 transition-colors" data-en="Amenities" data-es="Comodidades">Amenities</a>
+                <a href="#location" class="hover:text-blue-600 transition-colors" data-en="Location" data-es="Ubicación">Location</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
             </div>
-            <button class="md:hidden p-2" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars text-blue-600" style="font-size: 20px;"></i>
-            </button>
+            <div class="flex items-center space-x-2">
+                <button id="language-toggle" class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors" onclick="toggleLanguage()">
+                    <span id="lang-text">ES</span>
+                </button>
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-blue-600" style="font-size: 20px;"></i>
+                </button>
+            </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-4 space-y-4">
-                <a href="#gallery" class="block hover:text-blue-600 transition-colors">Gallery</a>
-                <a href="#amenities" class="block hover:text-blue-600 transition-colors">Amenities</a>
-                <a href="#location" class="block hover:text-blue-600 transition-colors">Location</a>
-                <a href="#contact" class="block hover:text-blue-600 transition-colors">Contact</a>
+                <a href="#gallery" class="block hover:text-blue-600 transition-colors" data-en="Gallery" data-es="Galería">Gallery</a>
+                <a href="#amenities" class="block hover:text-blue-600 transition-colors" data-en="Amenities" data-es="Comodidades">Amenities</a>
+                <a href="#location" class="block hover:text-blue-600 transition-colors" data-en="Location" data-es="Ubicación">Location</a>
+                <a href="#contact" class="block hover:text-blue-600 transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id = "hero"class="hero-image h-screen flex items-center justify-center text-center text-white">
+    <section id="hero" class="hero-image h-screen flex items-center justify-center text-center text-white">
         <div class="px-4 max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6">La Palmera - Fabulosa Casa</h1>
-            <p class="text-xl md:text-2xl mb-4">Premium suite in Playa Honda, Lanzarote</p>
-            <p class="text-lg md:text-xl mb-8 opacity-90">Experience the perfect blend of comfort and Canarian charm</p>
-            <a href="#contact" class="btn-primary inline-block">Book Your Stay</a>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6" data-en="La Palmera - Fabulosa Casa" data-es="La Palmera - Casa Fabulosa">La Palmera - Fabulosa Casa</h1>
+            <p class="text-xl md:text-2xl mb-4" data-en="Premium suite in Playa Honda, Lanzarote" data-es="Suite premium en Playa Honda, Lanzarote">Premium suite in Playa Honda, Lanzarote</p>
+            <p class="text-lg md:text-xl mb-8 opacity-90" data-en="Experience the perfect blend of comfort and Canarian charm" data-es="Experimenta la mezcla perfecta de comodidad y encanto canario">Experience the perfect blend of comfort and Canarian charm</p>
+            <a href="#contact" class="btn-primary inline-block" data-en="Book Your Stay" data-es="Reserva tu Estancia">Book Your Stay</a>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section id="gallery" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-serif font-bold text-center mb-4">Discover Our Suite</h2>
-            <p class="text-xl text-gray-600 text-center mb-12">Stunning views and modern amenities await you</p>
+            <h2 class="text-4xl font-serif font-bold text-center mb-4" data-en="Discover Our Suite" data-es="Descubre Nuestra Suite">Discover Our Suite</h2>
+            <p class="text-xl text-gray-600 text-center mb-12" data-en="Stunning views and modern amenities await you" data-es="Vistas impresionantes y comodidades modernas te esperan">Stunning views and modern amenities await you</p>
             
             <div class="max-w-6xl mx-auto">
                 <div class="gallery-slider">
@@ -414,56 +424,56 @@
     <!-- Amenities Section -->
     <section id="amenities" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-serif font-bold text-center mb-4">Amenities</h2>
-            <p class="text-xl text-gray-600 text-center mb-16">Everything you need for the perfect vacation</p>
+            <h2 class="text-4xl font-serif font-bold text-center mb-4" data-en="Amenities" data-es="Comodidades">Amenities</h2>
+            <p class="text-xl text-gray-600 text-center mb-16" data-en="Everything you need for the perfect vacation" data-es="Todo lo que necesitas para las vacaciones perfectas">Everything you need for the perfect vacation</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-home text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Modern Suite</h3>
-                    <p class="text-gray-600">Spacious 2-bedroom suite with contemporary design and premium finishes, private bathroom with shower and toilet</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="Modern Suite" data-es="Suite Moderna">Modern Suite</h3>
+                    <p class="text-gray-600" data-en="Spacious 2-bedroom suite with contemporary design and premium finishes, private bathroom with shower and toilet" data-es="Suite espaciosa de 2 dormitorios con diseño contemporáneo y acabados premium, baño privado con ducha y WC">Spacious 2-bedroom suite with contemporary design and premium finishes, private bathroom with shower and toilet</p>
                 </div>
                 
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-water text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Beach 5 minutes away</h3>
-                    <p class="text-gray-600">Step out the door and in 5 minutes you are at the beach</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="Beach 5 minutes away" data-es="Playa a 5 minutos">Beach 5 minutes away</h3>
+                    <p class="text-gray-600" data-en="Step out the door and in 5 minutes you are at the beach" data-es="Sal por la puerta y en 5 minutos estás en la playa">Step out the door and in 5 minutes you are at the beach</p>
                 </div>
                 
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-wifi text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">WiFi</h3>
-                    <p class="text-gray-600">Internet connection throughout the property for work or entertainment</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="WiFi" data-es="WiFi">WiFi</h3>
+                    <p class="text-gray-600" data-en="Internet connection throughout the property for work or entertainment" data-es="Conexión a internet en toda la propiedad para trabajo o entretenimiento">Internet connection throughout the property for work or entertainment</p>
                 </div>
                 
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-parking text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Free Parking</h3>
-                    <p class="text-gray-600">Private parking space for your rental car</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="Free Parking" data-es="Aparcamiento Gratuito">Free Parking</h3>
+                    <p class="text-gray-600" data-en="Private parking space for your rental car" data-es="Espacio de aparcamiento privado para tu coche de alquiler">Private parking space for your rental car</p>
                 </div>
                 
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-utensils text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Fully equipped kitchen</h3>
-                    <p class="text-gray-600">Fully equipped kitchen with all the amenities you need for a comfortable stay, including a fridge, oven, and all the utensils you need</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="Fully equipped kitchen" data-es="Cocina completamente equipada">Fully equipped kitchen</h3>
+                    <p class="text-gray-600" data-en="Fully equipped kitchen with all the amenities you need for a comfortable stay, including a fridge, oven, and all the utensils you need" data-es="Cocina completamente equipada con todas las comodidades que necesitas para una estancia cómoda, incluyendo nevera, horno y todos los utensilios necesarios">Fully equipped kitchen with all the amenities you need for a comfortable stay, including a fridge, oven, and all the utensils you need</p>
                 </div>
                 
                 <div class="feature-card text-center">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-tv text-blue-600" style="font-size: 32px;"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Smart TV</h3>
-                    <p class="text-gray-600">Large smart TV with streaming services for entertainment</p>
+                    <h3 class="text-xl font-semibold mb-3" data-en="Smart TV" data-es="Smart TV">Smart TV</h3>
+                    <p class="text-gray-600" data-en="Large smart TV with streaming services for entertainment" data-es="Smart TV grande con servicios de streaming para entretenimiento">Large smart TV with streaming services for entertainment</p>
                 </div>
             </div>
         </div>
@@ -472,20 +482,20 @@
     <!-- Location Section -->
     <section id="location" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-serif font-bold text-center mb-4">Perfect Location</h2>
-            <p class="text-xl text-gray-600 text-center mb-16">Playa Honda offers the best of Lanzarote</p>
+            <h2 class="text-4xl font-serif font-bold text-center mb-4" data-en="Perfect Location" data-es="Ubicación Perfecta">Perfect Location</h2>
+            <p class="text-xl text-gray-600 text-center mb-16" data-en="Playa Honda offers the best of Lanzarote" data-es="Playa Honda ofrece lo mejor de Lanzarote">Playa Honda offers the best of Lanzarote</p>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 <div>
-                    <h3 class="text-2xl font-semibold mb-6">Why Choose Playa Honda?</h3>
+                    <h3 class="text-2xl font-semibold mb-6" data-en="Why Choose Playa Honda?" data-es="¿Por qué elegir Playa Honda?">Why Choose Playa Honda?</h3>
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
                                 <i class="fas fa-location-dot text-blue-600" style="font-size: 16px;"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-2">Central Location</h4>
-                                <p class="text-gray-600">Perfectly positioned between Arrecife and Costa Teguise</p>
+                                <h4 class="font-semibold mb-2" data-en="Central Location" data-es="Ubicación Central">Central Location</h4>
+                                <p class="text-gray-600" data-en="Perfectly positioned between Arrecife and Costa Teguise" data-es="Perfectamente ubicado entre Arrecife y Costa Teguise">Perfectly positioned between Arrecife and Costa Teguise</p>
                             </div>
                         </div>
                         
@@ -494,8 +504,8 @@
                                 <i class="fas fa-sun text-blue-600" style="font-size: 16px;"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-2">Beautiful Beaches</h4>
-                                <p class="text-gray-600">Minutes away from pristine beaches and crystal clear waters</p>
+                                <h4 class="font-semibold mb-2" data-en="Beautiful Beaches" data-es="Playas Hermosas">Beautiful Beaches</h4>
+                                <p class="text-gray-600" data-en="Minutes away from pristine beaches and crystal clear waters" data-es="A minutos de playas vírgenes y aguas cristalinas">Minutes away from pristine beaches and crystal clear waters</p>
                             </div>
                         </div>
                         
@@ -504,8 +514,8 @@
                                 <i class="fas fa-bag-shopping text-blue-600" style="font-size: 16px;"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-2">Shopping & Dining</h4>
-                                <p class="text-gray-600">Close to supermarkets, restaurants, and local attractions</p>
+                                <h4 class="font-semibold mb-2" data-en="Shopping & Dining" data-es="Compras y Restauración">Shopping & Dining</h4>
+                                <p class="text-gray-600" data-en="Close to supermarkets, restaurants, and local attractions" data-es="Cerca de supermercados, restaurantes y atracciones locales">Close to supermarkets, restaurants, and local attractions</p>
                             </div>
                         </div>
                         
@@ -514,15 +524,15 @@
                                 <i class="fas fa-plane text-blue-600" style="font-size: 16px;"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-2">Airport Access</h4>
-                                <p class="text-gray-600">Just 10 minutes from Lanzarote Airport</p>
+                                <h4 class="font-semibold mb-2" data-en="Airport Access" data-es="Acceso al Aeropuerto">Airport Access</h4>
+                                <p class="text-gray-600" data-en="Just 10 minutes from Lanzarote Airport" data-es="Solo 10 minutos del Aeropuerto de Lanzarote">Just 10 minutes from Lanzarote Airport</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="bg-gray-100 rounded-2xl p-8">
-                    <h3 class="text-2xl font-semibold mb-6">Nearby Attractions</h3>
+                    <h3 class="text-2xl font-semibold mb-6" data-en="Nearby Attractions" data-es="Atracciones Cercanas">Nearby Attractions</h3>
                     <div class="space-y-4">
                         <div class="flex justify-between items-center py-2 border-b border-gray-200">
                             <span class="font-medium">Timanfaya National Park</span>
@@ -555,23 +565,23 @@
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-serif font-bold text-center mb-4">Get In Touch</h2>
-            <p class="text-xl text-gray-600 text-center mb-16">Ready to book your perfect Lanzarote getaway?</p>
+            <h2 class="text-4xl font-serif font-bold text-center mb-4" data-en="Get In Touch" data-es="Ponte en Contacto">Get In Touch</h2>
+            <p class="text-xl text-gray-600 text-center mb-16" data-en="Ready to book your perfect Lanzarote getaway?" data-es="¿Listo para reservar tu escapada perfecta a Lanzarote?">Ready to book your perfect Lanzarote getaway?</p>
             
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Contact Information -->
                 <div>
-                    <h3 class="text-2xl font-semibold mb-8">Contact Information</h3>
+                    <h3 class="text-2xl font-semibold mb-8" data-en="Contact Information" data-es="Información de Contacto">Contact Information</h3>
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
                                 <i class="fas fa-phone text-blue-600" style="font-size: 20px;"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-lg">Phone</p>
+                                <p class="font-semibold text-lg" data-en="Phone" data-es="Teléfono">Phone</p>
                                 <p class="text-gray-600">+34 659 578 189</p>
                                 <p class="text-gray-600">+34 605 169 750</p>
-                                <p class="text-sm text-gray-500">Available 9 AM - 9 PM</p>
+                                <p class="text-sm text-gray-500" data-en="Available 9 AM - 9 PM" data-es="Disponible 9 AM - 9 PM">Available 9 AM - 9 PM</p>
                             </div>
                         </div>
                         
@@ -580,9 +590,9 @@
                                 <i class="fas fa-envelope text-blue-600" style="font-size: 20px;"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-lg">Email</p>
+                                <p class="font-semibold text-lg" data-en="Email" data-es="Email">Email</p>
                                 <p class="text-gray-600">buganmarian@yahoo.com</p>
-                                <p class="text-sm text-gray-500">We respond as soon as possible</p>
+                                <p class="text-sm text-gray-500" data-en="We respond as soon as possible" data-es="Respondemos lo antes posible">We respond as soon as possible</p>
                             </div>
                         </div>
                         
@@ -591,15 +601,15 @@
                                 <i class="fas fa-location-dot text-blue-600" style="font-size: 20px;"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-lg">Address</p>
+                                <p class="font-semibold text-lg" data-en="Address" data-es="Dirección">Address</p>
                                 <p class="text-gray-600">Calle Guaticea 57, 35509 Playa Honda, Lanzarote, Spain</p>
-                                <p class="text-sm text-gray-500">5 minutes away from the beach</p>
+                                <p class="text-sm text-gray-500" data-en="5 minutes away from the beach" data-es="A 5 minutos de la playa">5 minutes away from the beach</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-12">
-                        <h4 class="font-semibold text-lg mb-4">Follow Us</h4>
+                        <h4 class="font-semibold text-lg mb-4" data-en="Follow Us" data-es="Síguenos">Follow Us</h4>
                         <div class="flex space-x-4">
                             <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
                                 <i class="fab fa-instagram text-blue-600" style="font-size: 18px;"></i>
@@ -616,48 +626,48 @@
                 
                 <!-- Contact Form -->
                 <div class="contact-form">
-                    <h3 class="text-2xl font-semibold mb-6">Send Us a Message</h3>
+                    <h3 class="text-2xl font-semibold mb-6" data-en="Send Us a Message" data-es="Envíanos un Mensaje">Send Us a Message</h3>
                     <form id="contact-form" onsubmit="handleFormSubmit(event)">
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
-                            <input type="text" name="name" required class="form-input" placeholder="Your full name">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Full Name *" data-es="Nombre Completo *">Full Name *</label>
+                            <input type="text" name="name" required class="form-input" placeholder="Your full name" data-en-placeholder="Your full name" data-es-placeholder="Tu nombre completo">
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
-                            <input type="email" name="email" required class="form-input" placeholder="your.email@example.com">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Email Address *" data-es="Dirección de Email *">Email Address *</label>
+                            <input type="email" name="email" required class="form-input" placeholder="your.email@example.com" data-en-placeholder="your.email@example.com" data-es-placeholder="tu.email@ejemplo.com">
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
-                            <input type="tel" name="phone" class="form-input" placeholder="+34 123 456 789">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+                            <input type="tel" name="phone" class="form-input" placeholder="+34 123 456 789" data-en-placeholder="+34 123 456 789" data-es-placeholder="+34 123 456 789">
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Check-in Date</label>
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Check-in Date" data-es="Fecha de Llegada">Check-in Date</label>
                             <input type="date" name="checkin" class="form-input">
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Check-out Date</label>
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Check-out Date" data-es="Fecha de Salida">Check-out Date</label>
                             <input type="date" name="checkout" class="form-input">
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Number of Guests</label>
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Number of Guests" data-es="Número de Huéspedes">Number of Guests</label>
                             <select name="guests" class="form-input">
-                                <option value="1-2">1-2 guests</option>
-                                <option value="3-4">3-4 guests</option>
-                                <option value="5+">5+ guests</option>
+                                <option value="1-2" data-en="1-2 guests" data-es="1-2 huéspedes">1-2 guests</option>
+                                <option value="3-4" data-en="3-4 guests" data-es="3-4 huéspedes">3-4 guests</option>
+                                <option value="5+" data-en="5+ guests" data-es="5+ huéspedes">5+ guests</option>
                             </select>
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2">Message *</label>
-                            <textarea name="message" required rows="4" class="form-input" placeholder="Tell us about your stay requirements, special requests, or any questions you have..."></textarea>
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Message *" data-es="Mensaje *">Message *</label>
+                            <textarea name="message" required rows="4" class="form-input" placeholder="Tell us about your stay requirements, special requests, or any questions you have..." data-en-placeholder="Tell us about your stay requirements, special requests, or any questions you have..." data-es-placeholder="Cuéntanos sobre los requisitos de tu estancia, solicitudes especiales o cualquier pregunta que tengas..."></textarea>
                         </div>
                         
-                        <button type="submit" class="btn-primary w-full">
+                        <button type="submit" class="btn-primary w-full" data-en="Send Message" data-es="Enviar Mensaje">
                             Send Message
                         </button>
                     </form>
@@ -672,7 +682,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="text-2xl font-bold font-serif mb-4">La Palmera - Fabulosa Casa</div>
-                    <p class="text-gray-400 mb-4">Your perfect getaway in Playa Honda, Lanzarote. Experience luxury, comfort, and the beauty of the Canary Islands.</p>
+                    <p class="text-gray-400 mb-4" data-en="Your perfect getaway in Playa Honda, Lanzarote. Experience luxury, comfort, and the beauty of the Canary Islands." data-es="Tu escapada perfecta en Playa Honda, Lanzarote. Experimenta lujo, comodidad y la belleza de las Islas Canarias.">Your perfect getaway in Playa Honda, Lanzarote. Experience luxury, comfort, and the beauty of the Canary Islands.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors">
                             <i class="fab fa-instagram" style="font-size: 20px;"></i>
@@ -687,17 +697,17 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <h4 class="font-semibold text-lg mb-4" data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h4>
                     <div class="space-y-2">
-                        <a href="#gallery" class="block text-gray-400 hover:text-white transition-colors">Gallery</a>
-                        <a href="#amenities" class="block text-gray-400 hover:text-white transition-colors">Amenities</a>
-                        <a href="#location" class="block text-gray-400 hover:text-white transition-colors">Location</a>
-                        <a href="#contact" class="block text-gray-400 hover:text-white transition-colors">Contact</a>
+                        <a href="#gallery" class="block text-gray-400 hover:text-white transition-colors" data-en="Gallery" data-es="Galería">Gallery</a>
+                        <a href="#amenities" class="block text-gray-400 hover:text-white transition-colors" data-en="Amenities" data-es="Comodidades">Amenities</a>
+                        <a href="#location" class="block text-gray-400 hover:text-white transition-colors" data-en="Location" data-es="Ubicación">Location</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-white transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold text-lg mb-4">Contact Info</h4>
+                    <h4 class="font-semibold text-lg mb-4" data-en="Contact Info" data-es="Información de Contacto">Contact Info</h4>
                     <div class="space-y-2 text-gray-400">
                         <p>Playa Honda, Lanzarote</p>
                         <p>+34 123 456 789</p>
@@ -707,7 +717,7 @@
             </div>
             
             <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Casa Fabulosa. All rights reserved.</p>
+                <p data-en="&copy; 2025 Casa Fabulosa. All rights reserved." data-es="&copy; 2025 Casa Fabulosa. Todos los derechos reservados.">&copy; 2025 Casa Fabulosa. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -715,7 +725,7 @@
     <!-- Floating Action Button -->
     <a href="#contact" class="floating-action">
         <i class="fas fa-calendar" style="font-size: 18px;"></i>
-        Book Now
+        <span data-en="Book Now" data-es="Reservar Ahora">Book Now</span>
     </a>
 
     <script>
@@ -937,6 +947,33 @@ Message: ${data.message}
                 nav.classList.remove('bg-white/98');
             }
         });
+
+        // Language switching functionality
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            updateLanguage();
+            updateLanguageToggle();
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-en][data-es]');
+            elements.forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            // Update placeholders
+            const placeholderElements = document.querySelectorAll('[data-en-placeholder][data-es-placeholder]');
+            placeholderElements.forEach(element => {
+                element.placeholder = element.getAttribute(`data-${currentLanguage}-placeholder`);
+            });
+        }
+
+        function updateLanguageToggle() {
+            const langText = document.getElementById('lang-text');
+            langText.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
+        }
     </script>
 </body>
 </html>
