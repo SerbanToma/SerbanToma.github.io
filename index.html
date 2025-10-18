@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabulosa Casa - Luxury Villa in Playa Honda, Lanzarote</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('photos/382526807.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-slide:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .gallery-nav.prev {
+            left: 20px;
+        }
+        
+        .gallery-nav.next {
+            right: 20px;
+        }
+        
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 4rem 0;
+        }
+        
+        .floating-action {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .lightbox-nav.prev {
+            left: -80px;
+        }
+        
+        .lightbox-nav.next {
+            right: -80px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-counter {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-slide {
+                height: 300px;
+            }
+            
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .gallery-nav.prev {
+                left: 10px;
+            }
+            
+            .gallery-nav.next {
+                right: 10px;
+            }
+            
+            .floating-action {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .lightbox-nav.prev {
+                left: -60px;
+            }
+            
+            .lightbox-nav.next {
+                right: -60px;
+            }
+            
+            .lightbox-close {
+                top: -50px;
+                right: -50px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .lightbox-counter {
+                bottom: -50px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href = '#hero' class="text-2xl font-bold font-serif text-gray-800">Fabulosa Casa</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#gallery" class="hover:text-blue-600 transition-colors">Gallery</a>
+                <a href="#amenities" class="hover:text-blue-600 transition-colors">Amenities</a>
+                <a href="#location" class="hover:text-blue-600 transition-colors">Location</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars text-blue-600" style="font-size: 20px;"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#gallery" class="block hover:text-blue-600 transition-colors">Gallery</a>
+                <a href="#amenities" class="block hover:text-blue-600 transition-colors">Amenities</a>
+                <a href="#location" class="block hover:text-blue-600 transition-colors">Location</a>
+                <a href="#contact" class="block hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id = "hero"class="hero-image h-screen flex items-center justify-center text-center text-white">
+        <div class="px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6">La Palmera - Fabulosa Casa</h1>
+            <p class="text-xl md:text-2xl mb-4">Premium suite in Playa Honda, Lanzarote</p>
+            <p class="text-lg md:text-xl mb-8 opacity-90">Experience the perfect blend of comfort and Canarian charm</p>
+            <a href="#contact" class="btn-primary inline-block">Book Your Stay</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-serif font-bold text-center mb-4">Discover Our Suite</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">Stunning views and modern amenities await you</p>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="gallery-slider">
+                    <div class="gallery-slides" id="gallery-slides">
+                        <!-- Slides will be populated by JavaScript -->
+                    </div>
+                    <button class="gallery-nav prev" onclick="previousSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav next" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="gallery-dots" id="gallery-dots">
+                        <!-- Dots will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <button class="lightbox-nav prev" onclick="lightboxPrevious()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav next" onclick="lightboxNext()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="lightbox-close" onclick="closeLightbox()">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="lightbox-counter">
+                <span id="lightbox-counter">1 / 18</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-serif font-bold text-center mb-4">Amenities</h2>
+            <p class="text-xl text-gray-600 text-center mb-16">Everything you need for the perfect vacation</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Modern Suite</h3>
+                    <p class="text-gray-600">Spacious 2-bedroom suite with contemporary design and premium finishes, private bathroom with shower and toilet</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-water text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Beach 5 minutes away</h3>
+                    <p class="text-gray-600">Step out the door and in 5 minutes you are at the beach</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-wifi text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">WiFi</h3>
+                    <p class="text-gray-600">Internet connection throughout the property for work or entertainment</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-parking text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Free Parking</h3>
+                    <p class="text-gray-600">Private parking space for your rental car</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-utensils text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Fully equipped kitchen</h3>
+                    <p class="text-gray-600">Fully equipped kitchen with all the amenities you need for a comfortable stay, including a fridge, oven, and all the utensils you need</p>
+                </div>
+                
+                <div class="feature-card text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tv text-blue-600" style="font-size: 32px;"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Smart TV</h3>
+                    <p class="text-gray-600">Large smart TV with streaming services for entertainment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-serif font-bold text-center mb-4">Perfect Location</h2>
+            <p class="text-xl text-gray-600 text-center mb-16">Playa Honda offers the best of Lanzarote</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Why Choose Playa Honda?</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-location-dot text-blue-600" style="font-size: 16px;"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Central Location</h4>
+                                <p class="text-gray-600">Perfectly positioned between Arrecife and Costa Teguise</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-sun text-blue-600" style="font-size: 16px;"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Beautiful Beaches</h4>
+                                <p class="text-gray-600">Minutes away from pristine beaches and crystal clear waters</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-bag-shopping text-blue-600" style="font-size: 16px;"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Shopping & Dining</h4>
+                                <p class="text-gray-600">Close to supermarkets, restaurants, and local attractions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-plane text-blue-600" style="font-size: 16px;"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Airport Access</h4>
+                                <p class="text-gray-600">Just 10 minutes from Lanzarote Airport</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-100 rounded-2xl p-8">
+                    <h3 class="text-2xl font-semibold mb-6">Nearby Attractions</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="font-medium">Timanfaya National Park</span>
+                            <span class="text-blue-600">25 min</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="font-medium">Jameos del Agua</span>
+                            <span class="text-blue-600">30 min</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="font-medium">Cueva de los Verdes</span>
+                            <span class="text-blue-600">35 min</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="font-medium">Costa Teguise</span>
+                            <span class="text-blue-600">15 min</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="font-medium">Arrecife City Center</span>
+                            <span class="text-blue-600">10 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-serif font-bold text-center mb-4">Get In Touch</h2>
+            <p class="text-xl text-gray-600 text-center mb-16">Ready to book your perfect Lanzarote getaway?</p>
+            
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-phone text-blue-600" style="font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-lg">Phone</p>
+                                <p class="text-gray-600">+34 659 578 189</p>
+                                <p class="text-sm text-gray-500">Available 9 AM - 9 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-envelope text-blue-600" style="font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-lg">Email</p>
+                                <p class="text-gray-600">info@fabulosacasa.es</p>
+                                <p class="text-sm text-gray-500">We respond as soon as possible</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-location-dot text-blue-600" style="font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-lg">Address</p>
+                                <p class="text-gray-600">Calle Guaticea 57, 35509 Playa Honda, Lanzarote, Spain</p>
+                                <p class="text-sm text-gray-500">5 minutes away from the beach</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h4 class="font-semibold text-lg mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
+                                <i class="fab fa-instagram text-blue-600" style="font-size: 18px;"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
+                                <i class="fab fa-facebook text-blue-600" style="font-size: 18px;"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors">
+                                <i class="fab fa-twitter text-blue-600" style="font-size: 18px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 class="text-2xl font-semibold mb-6">Send Us a Message</h3>
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
+                            <input type="text" name="name" required class="form-input" placeholder="Your full name">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
+                            <input type="email" name="email" required class="form-input" placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                            <input type="tel" name="phone" class="form-input" placeholder="+34 123 456 789">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Check-in Date</label>
+                            <input type="date" name="checkin" class="form-input">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Check-out Date</label>
+                            <input type="date" name="checkout" class="form-input">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Number of Guests</label>
+                            <select name="guests" class="form-input">
+                                <option value="1-2">1-2 guests</option>
+                                <option value="3-4">3-4 guests</option>
+                                <option value="5+">5+ guests</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Message *</label>
+                            <textarea name="message" required rows="4" class="form-input" placeholder="Tell us about your stay requirements, special requests, or any questions you have..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold font-serif mb-4">La Palmera - Fabulosa Casa</div>
+                    <p class="text-gray-400 mb-4">Your perfect getaway in Playa Honda, Lanzarote. Experience luxury, comfort, and the beauty of the Canary Islands.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram" style="font-size: 20px;"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook" style="font-size: 20px;"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter" style="font-size: 20px;"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#gallery" class="block text-gray-400 hover:text-white transition-colors">Gallery</a>
+                        <a href="#amenities" class="block text-gray-400 hover:text-white transition-colors">Amenities</a>
+                        <a href="#location" class="block text-gray-400 hover:text-white transition-colors">Location</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Playa Honda, Lanzarote</p>
+                        <p>+34 123 456 789</p>
+                        <p>info@casafabulosa.eu</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Casa Fabulosa. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <a href="#contact" class="floating-action">
+        <i class="fas fa-calendar" style="font-size: 18px;"></i>
+        Book Now
+    </a>
+
+    <script>
+        // Gallery functionality
+        const photos = [
+            'photos/382526304.jpg',
+            'photos/382526420.jpg',
+            'photos/382526807.jpg',
+            'photos/382526840.jpg',
+            'photos/382527107.jpg',
+            'photos/382527161.jpg',
+            'photos/382527494.jpg',
+            'photos/382527569.jpg',
+            'photos/382527634.jpg',
+            'photos/382527656.jpg',
+            'photos/382527792.jpg',
+            'photos/382527883.jpg',
+            'photos/382527902.jpg',
+            'photos/382527938.jpg',
+            'photos/382528204.jpg',
+            'photos/382528218.jpg',
+            'photos/382528311.jpg',
+            'photos/382528378.jpg',
+        ];
+
+        let currentSlide = 0;
+        let slideInterval;
+
+        function initGallery() {
+            const slidesContainer = document.getElementById('gallery-slides');
+            const dotsContainer = document.getElementById('gallery-dots');
+            
+            // Create slides
+            photos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.style.backgroundImage = `url('${photo}')`;
+                slide.onclick = () => openLightbox(index);
+                slidesContainer.appendChild(slide);
+                
+                // Create dots
+                const dot = document.createElement('div');
+                dot.className = `gallery-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+            
+            // Start auto-slide
+            startAutoSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            const slidesContainer = document.getElementById('gallery-slides');
+            const dots = document.querySelectorAll('.gallery-dot');
+            
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % photos.length;
+            goToSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + photos.length) % photos.length;
+            goToSlide(currentSlide);
+        }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(slideInterval);
+        }
+
+        // Lightbox functionality
+        let lightboxCurrentIndex = 0;
+
+        function openLightbox(index) {
+            lightboxCurrentIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            
+            lightboxImage.src = photos[index];
+            lightboxCounter.textContent = `${index + 1} / ${photos.length}`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Stop auto-slide when lightbox is open
+            stopAutoSlide();
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Resume auto-slide when lightbox is closed
+            startAutoSlide();
+        }
+
+        function lightboxNext() {
+            lightboxCurrentIndex = (lightboxCurrentIndex + 1) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            
+            lightboxImage.src = photos[lightboxCurrentIndex];
+            lightboxCounter.textContent = `${lightboxCurrentIndex + 1} / ${photos.length}`;
+        }
+
+        function lightboxPrevious() {
+            lightboxCurrentIndex = (lightboxCurrentIndex - 1 + photos.length) % photos.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            
+            lightboxImage.src = photos[lightboxCurrentIndex];
+            lightboxCounter.textContent = `${lightboxCurrentIndex + 1} / ${photos.length}`;
+        }
+
+        // Pause auto-slide on hover
+        document.addEventListener('DOMContentLoaded', function() {
+            initGallery();
+            // feather.replace();
+            
+            const gallerySlider = document.querySelector('.gallery-slider');
+            gallerySlider.addEventListener('mouseenter', stopAutoSlide);
+            gallerySlider.addEventListener('mouseleave', startAutoSlide);
+            
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', function(e) {
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox.classList.contains('active')) {
+                    switch(e.key) {
+                        case 'Escape':
+                            closeLightbox();
+                            break;
+                        case 'ArrowLeft':
+                            lightboxPrevious();
+                            break;
+                        case 'ArrowRight':
+                            lightboxNext();
+                            break;
+                    }
+                }
+            });
+            
+            // Click outside lightbox to close
+            document.getElementById('lightbox').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Create mailto link with form data
+            const subject = `Booking Inquiry - Fabulosa Casa`;
+            const body = `
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone || 'Not provided'}
+Check-in: ${data.checkin || 'Not specified'}
+Check-out: ${data.checkout || 'Not specified'}
+Guests: ${data.guests}
+Message: ${data.message}
+            `.trim();
+            
+            const mailtoLink = `mailto:info@fabulosacasa.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('Thank you for your inquiry! Your email client should open with a pre-filled message. Please send the email to complete your booking request.');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/98');
+            } else {
+                nav.classList.remove('bg-white/98');
+            }
+        });
+    </script>
+</body>
+</html>
