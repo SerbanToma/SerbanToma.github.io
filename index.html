@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fabulosa Casa - Luxury Villa in Playa Honda, Lanzarote</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
@@ -341,15 +342,16 @@
     <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href = '#hero' class="text-2xl font-bold font-serif text-gray-800">Fabulosa Casa</a>
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden md:flex items-center space-x-8">
                 <a href="#gallery" class="hover:text-blue-600 transition-colors" data-en="Gallery" data-es="Galería">Gallery</a>
                 <a href="#amenities" class="hover:text-blue-600 transition-colors" data-en="Amenities" data-es="Comodidades">Amenities</a>
                 <a href="#location" class="hover:text-blue-600 transition-colors" data-en="Location" data-es="Ubicación">Location</a>
                 <a href="#contact" class="hover:text-blue-600 transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
             </div>
             <div class="flex items-center space-x-2">
-                <button id="language-toggle" class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors" onclick="toggleLanguage()">
-                    <span id="lang-text">ES</span>
+                <button id="language-toggle" class="flex items-center space-x-2 px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors" onclick="toggleLanguage()">
+                    <i id="flag-icon" class="fi fi-us text-lg"></i>
+                    <span id="lang-text" data-en="Language: EN" data-es="Idioma: ES">Language: EN</span>
                 </button>
                 <button class="md:hidden p-2" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars text-blue-600" style="font-size: 20px;"></i>
@@ -363,6 +365,10 @@
                 <a href="#amenities" class="block hover:text-blue-600 transition-colors" data-en="Amenities" data-es="Comodidades">Amenities</a>
                 <a href="#location" class="block hover:text-blue-600 transition-colors" data-en="Location" data-es="Ubicación">Location</a>
                 <a href="#contact" class="block hover:text-blue-600 transition-colors" data-en="Contact" data-es="Contacto">Contact</a>
+                <button id="language-toggle-mobile" class="flex items-center space-x-2 px-3 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors" onclick="toggleLanguage()">
+                    <i id="flag-icon-mobile" class="fi fi-us text-lg"></i>
+                    <span id="lang-text-mobile" data-en="Language: EN" data-es="Idioma: ES">Language: EN</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -971,8 +977,26 @@ Message: ${data.message}
         }
 
         function updateLanguageToggle() {
-            const langText = document.getElementById('lang-text');
-            langText.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
+            const desktop = document.getElementById('lang-text');
+            const mobile = document.getElementById('lang-text-mobile');
+            const desktopIcon = document.getElementById('flag-icon');
+            const mobileIcon = document.getElementById('flag-icon-mobile');
+            
+            const desktopText = currentLanguage === 'en' ? desktop?.getAttribute('data-en') : desktop?.getAttribute('data-es');
+            const mobileText = currentLanguage === 'en' ? mobile?.getAttribute('data-en') : mobile?.getAttribute('data-es');
+            
+            if (desktop && desktopText) desktop.textContent = desktopText;
+            if (mobile && mobileText) mobile.textContent = mobileText;
+            
+            // Update flag icons using flag-icons classes
+            const flagClass = currentLanguage === 'en' ? 'fi fi-us' : 'fi fi-es';
+            
+            if (desktopIcon) {
+                desktopIcon.className = `${flagClass} text-lg`;
+            }
+            if (mobileIcon) {
+                mobileIcon.className = `${flagClass} text-lg`;
+            }
         }
     </script>
 </body>
